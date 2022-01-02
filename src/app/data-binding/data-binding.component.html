@@ -1,0 +1,125 @@
+
+<section class="property-binding">
+
+    <article>
+        <h3>Interpolation</h3>
+        <p>String rendered with interpolation: {{ url }}</p>
+        <p>Result of 1 + 1 is: {{ 1 + 1 }}</p>
+        <p>Result of 1 + 1 is not: {{ 1 + 1 + getValue() }}</p>
+        <p>Angular course and evaluations: {{ angularCourse && getEnjoyCourse() }}</p>
+    </article>
+    <br>
+    <br>
+    <article>
+        <h3>Property Binding</h3>
+        <img src="{{ urlImage }}">
+        <img [src]="urlImage">
+        <img bind-src="urlImage">
+    </article>
+    <br>
+    <br>
+    <br>
+    <hr>
+    <article>
+        <h3>Class and Style Binding</h3>
+        <br>
+        <div>
+            Select a class:
+            <select #classe (change)="0">
+                <option value="alert-success">Success</option>
+                <option value="alert-info">Info</option>
+                <option value="alert-warning">Warning</option>
+                <option value="alert-danger">Danger</option>
+            </select>
+            <br>
+            <br>
+
+            <div class="alert {{ classe.value }}">Color text defined by combobox value.</div>
+
+            <div class="alert" role="alert" [class.alert-success]="classe.value == 'alert-success'">SUCCESS</div>
+            <div class="alert" role="alert" [class.alert-info]="classe.value == 'alert-info'">INFO</div>
+            <div class="alert" role="alert" [class.alert-warning]="classe.value == 'alert-warning'">WARNING</div>
+            <div class="alert" role="alert" [class.alert-danger]="classe.value == 'alert-danger'">DANGER</div>
+            
+            <div class="alert alert-danger" role="alert" [style.display]="classe.value == 'alert-danger' ? 'block' : 'none'">
+                This text appear just in error case.
+            </div>
+        </div>
+    </article>
+    <br>
+    <br>
+    <hr>
+    <article>
+        <h3>Event Binding</h3>
+        <br>
+        <br>
+        <div>
+            <button class="btn btn-primary" (click)="clickedButton()">Click me!</button>
+            <br>
+            <br>
+            <input type="text" (keyup)="onKeyUp($event)"
+            (keyup.enter)="saveValue($any($event.target).value)"
+            (blur)="saveValue(inputField.value)"
+            #inputField>
+            <br>
+            <p>Current value: {{ currentValue }}</p>
+            <p>Saved value: {{ savedValue }}</p>
+            <br>
+
+            <span (mouseover)="onMouseOverOut()"
+            (mouseout)="onMouseOverOut()"
+            [class.highlight]="isMouseOver">
+                Pass the mouse over me!
+            </span>
+        </div>
+    </article>
+
+</section>
+<br>
+<br>
+<br>
+<hr>
+<section class="two-way-binding">
+    <article>
+        <h3>Two-way Data Binding</h3>
+        <div>
+            <input type="text" 
+            [value]="name"
+            (input)="name = $any($event.target).value">
+
+            <input type="text"
+            [ngModel]="name"
+            (ngModelChange)="name = $event">
+
+            <input type="text"
+            [(ngModel)]="name">
+            <br>
+            <p>You type: {{ name }}</p>
+            <br>
+            <div>
+                <p>My name is {{ person.name }} and i am {{ person.age}} years old.</p>
+
+                <input type="text" [(ngModel)]="person.name">
+                <input type="text" [(ngModel)]="person.age">
+            </div>
+        </div>
+    </article>
+</section>
+<br>
+<br>
+<br>
+<hr>
+<section class="input-output-properties">
+    <article>
+
+        <h3>Input / Output Properties</h3>
+        <br>
+
+        <app-input-property [name]="courseName"></app-input-property>
+    
+        <app-output-property [value]="initialValue"
+        (valueChanged)="onValueChange($event)">
+
+        </app-output-property>
+    </article>
+</section>
